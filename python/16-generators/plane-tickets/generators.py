@@ -14,7 +14,8 @@ def generate_seat_letters(number):
 
     """
 
-    pass
+    for i in range(number):
+        yield ['A', 'B', 'C', 'D'][i % 4]
 
 
 def generate_seats(number):
@@ -34,7 +35,23 @@ def generate_seats(number):
 
     """
 
-    pass
+    row_number = 1
+
+    for i in range(number):
+        if row_number == 13:
+            row_number = 14
+        
+        yield f'{row_number}{['A', 'B', 'C', 'D'][i % 4]}'
+
+        if i % 4 == 3:
+            row_number = row_number + 1
+
+seats = generate_seats(58)
+seatlist = []
+for i in range(58):
+    seatlist.append(next(seats))
+
+print(seatlist)
 
 def assign_seats(passengers):
     """Assign seats to passengers.
@@ -46,7 +63,13 @@ def assign_seats(passengers):
 
     """
 
-    pass
+    pass_dict = dict()
+    seat_gen = generate_seats(len(passengers))
+
+    for item in passengers:
+        pass_dict[item] = seat_gen.__next__()
+
+    return pass_dict
 
 def generate_codes(seat_numbers, flight_id):
     """Generate codes for a ticket.
@@ -57,4 +80,11 @@ def generate_codes(seat_numbers, flight_id):
 
     """
 
-    pass
+    for seat in seat_numbers:
+        code = seat + flight_id
+        for i in range(12 - len(code)):
+            code = code + '0'
+        
+        yield code
+
+
