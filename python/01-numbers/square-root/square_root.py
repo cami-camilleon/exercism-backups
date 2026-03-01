@@ -1,2 +1,6 @@
 def square_root(number):
-    pass
+    for i in range(number):
+        if number == 1:
+            return 1
+        if i * i > number:
+            return i - 1
