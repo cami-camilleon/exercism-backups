@@ -57,25 +57,34 @@ def fix_wagon_depot(wagons_rows):
     :param wagons_rows: list[list[tuple]] - the list of rows of wagons.
     :return: list[list[tuple]] - list of rows of wagons.
     """
-    
-    unpacked = []
 
-    for thing in wagons_rows:
-        *unpacked, = *unpacked, *thing
+    ziplist = []
+    for item in list(zip(*wagons_rows)):
+        ziplist.append(list(item))
 
-    list1 = []
-    list2 = []
-    list3 = []
+    return ziplist
 
-    for i, item in enumerate(unpacked):
-        if i % 3 == 0:
-            list1.append(item)
-        elif i % 3 == 1:
-            list2.append(item)
-        else:
-            list3.append(item)
-
-    return([list1, list2, list3])
+    # um i guess i was supposed to use zip()...
+    # i forgot about zip().......
+    # ____ old solution _____________________
+    # unpacked = []
+    # 
+    # for thing in wagons_rows:
+    #     *unpacked, = *unpacked, *thing
+    # 
+    # list1 = []
+    # list2 = []
+    # list3 = []
+    #
+    # for i, item in enumerate(unpacked):
+    #     if i % 3 == 0:
+    #         list1.append(item)
+    #     elif i % 3 == 1:
+    #         list2.append(item)
+    #     else:
+    #         list3.append(item)
+    # 
+    # return([list1, list2, list3])
     
 fix_wagon_depot([
                     [(2, "red"), (4, "red"), (8, "red")],
